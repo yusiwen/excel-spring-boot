@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>cn.yusiwen</groupId>
+    <artifactId>java-base-parent</artifactId>
+    <version>4</version>
+    <relativePath /> <!-- lookup parent from repository -->
+  </parent>
+
+  <artifactId>excel-spring-boot</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+
+  <modules>
+    <module>excel-spring-boot-starter</module>
+    <module>excel-spring-boot-example</module>
+  </modules>
+
+  <name>excel-spring-boot</name>
+  <description>Spring boot starter for excel</description>
+  <url>https://github.com/yusiwen/excel-spring-boot</url>
+  <packaging>pom</packaging>
+
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    </license>
+  </licenses>
+
+  <scm>
+    <connection>scm:git:ssh://git@github.com/yusiwen/excel-spring-boot.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/yusiwen/excel-spring-boot.git</developerConnection>
+    <url>https://github.com/yusiwen/excel-spring-boot</url>
+    <tag>spring-boot-2.4.x</tag>
+  </scm>
+
+  <developers>
+    <developer>
+      <id>yusiwen</id>
+      <name>Siwen Yu</name>
+      <email>yusiwen@gmail.com</email>
+    </developer>
+  </developers>
+
+  <issueManagement>
+    <system>Github</system>
+    <url>https://github.com/yusiwen/excel-spring-boot/issues</url>
+  </issueManagement>
+  <ciManagement>
+    <system>travis-ci</system>
+    <url>https://travis-ci.org/yusiwen/excel-spring-boot</url>
+  </ciManagement>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>cn.yusiwen</groupId>
+        <artifactId>spring-boot-base-bom</artifactId>
+        <version>2.4.0</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+</project>

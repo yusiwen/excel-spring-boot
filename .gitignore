@@ -1,0 +1,11 @@
+.factorypath
+.idea
+.settings
+.classpath
+.project
+target/
+.mvn/wrapper/maven-wrapper.jar
+.apt_generated_tests/
+pom.xml.releaseBackup
+release.properties
+*.iml
