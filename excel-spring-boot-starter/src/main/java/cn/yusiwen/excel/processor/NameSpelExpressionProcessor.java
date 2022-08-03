@@ -27,7 +27,7 @@ public class NameSpelExpressionProcessor implements NameProcessor {
     private static final ExpressionParser PARSER = new SpelExpressionParser();
 
     @Override
-    @SuppressFBWarnings("NP_NONNULL_PARAM_VIOLATION")
+    @SuppressFBWarnings({"NP_NONNULL_PARAM_VIOLATION", "SPEL_INJECTION"})
     public String doDetermineName(Object[] args, Method method, String key) {
 
         if (!key.contains("#")) {

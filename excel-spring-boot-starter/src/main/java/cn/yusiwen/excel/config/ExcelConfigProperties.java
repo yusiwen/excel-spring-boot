@@ -4,11 +4,14 @@ import lombok.Data;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * @author yusiwen
  */
 @Data
 @ConfigurationProperties(prefix = ExcelConfigProperties.PREFIX)
+@SuppressFBWarnings("USBR_UNNECESSARY_STORE_BEFORE_RETURN")
 public class ExcelConfigProperties {
 
     /**

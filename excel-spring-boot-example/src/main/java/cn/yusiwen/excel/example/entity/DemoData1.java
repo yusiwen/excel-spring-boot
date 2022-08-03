@@ -7,12 +7,15 @@ import com.alibaba.excel.enums.poi.FillPatternTypeEnum;
 
 import lombok.Data;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * Demo1演示数据
  *
  * @author yusiwen
  */
 @Data
+@SuppressFBWarnings("USBR_UNNECESSARY_STORE_BEFORE_RETURN")
 public class DemoData1 {
     /**
      * User name

@@ -31,7 +31,7 @@ public class DemoController1 {
     @GetMapping("/export")
     @ExportExcel(name = "demo1", sheets = @Sheet(sheetName = "demoSheet1"))
     public List<DemoData1> export1() {
-        List<DemoData1> dataList = new ArrayList<>();
+        List<DemoData1> dataList = new ArrayList<>(100);
         for (int i = 0; i < 100; i++) {
             DemoData1 data = new DemoData1();
             data.setUsername("tr1" + i);
@@ -45,8 +45,7 @@ public class DemoController1 {
     public String import1(@ImportExcel List<DemoData1> data1List, BindingResult bindingResult) {
         List<ErrorMessage> errorMessageList = (List<ErrorMessage>) bindingResult.getTarget();
         if (errorMessageList != null) {
-            log.error("Binding errors:");
-            log.error(Arrays.toString(errorMessageList.toArray()));
+            log.error("Binding errors: {}", errorMessageList);
         }
         return Arrays.toString(data1List.toArray());
     }
