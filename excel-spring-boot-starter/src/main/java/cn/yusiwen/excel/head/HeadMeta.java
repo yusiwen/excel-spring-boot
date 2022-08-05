@@ -5,10 +5,13 @@ import java.util.Set;
 
 import lombok.Data;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * @author yusiwen
  */
 @Data
+@SuppressFBWarnings("USBR_UNNECESSARY_STORE_BEFORE_RETURN")
 public class HeadMeta {
 
     /**

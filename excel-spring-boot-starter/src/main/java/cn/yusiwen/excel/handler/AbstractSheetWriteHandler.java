@@ -16,6 +16,7 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Modifier;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
@@ -108,7 +109,8 @@ public abstract class AbstractSheetWriteHandler implements SheetWriteHandler, Ap
         if (isEmpty(name)) {
             name = UUID.randomUUID().toString();
         }
-        String fileName = String.format("%s%s", URLEncoder.encode(name, "UTF-8"), exportExcel.suffix().getValue());
+        String fileName = String.format("%s%s", URLEncoder.encode(name, StandardCharsets.UTF_8.name()),
+                exportExcel.suffix().getValue());
         // 根据实际的文件类型找到对应的 contentType
         String contentType = MediaTypeFactory.getMediaType(fileName).map(MediaType::toString)
                 .orElse("application/vnd.ms-excel");
@@ -131,7 +133,7 @@ public abstract class AbstractSheetWriteHandler implements SheetWriteHandler, Ap
     public ExcelWriter getExcelWriter(HttpServletResponse response, ExportExcel exportExcel) {
         ExcelWriterBuilder writerBuilder = EasyExcel.write(response.getOutputStream())
                 .registerConverter(LocalDateStringConverter.INSTANCE)
-                .registerConverter(LocalDateTimeStringConverter.INSTANCE).autoCloseStream(true)
+                .registerConverter(LocalDateTimeStringConverter.INSTANCE).autoCloseStream(Boolean.TRUE)
                 .excelType(exportExcel.suffix()).inMemory(exportExcel.inMemory());
 
         if (StringUtils.hasText(exportExcel.password())) {

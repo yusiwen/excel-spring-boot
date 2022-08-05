@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * 校验错误信息
  *
@@ -15,6 +17,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@SuppressFBWarnings("USBR_UNNECESSARY_STORE_BEFORE_RETURN")
 public class ErrorMessage {
 
     /**
