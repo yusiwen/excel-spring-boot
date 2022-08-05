@@ -6,7 +6,7 @@
   <parent>
     <groupId>cn.yusiwen</groupId>
     <artifactId>java-base-parent</artifactId>
-    <version>4</version>
+    <version>11</version>
     <relativePath /> <!-- lookup parent from repository -->
   </parent>
 
