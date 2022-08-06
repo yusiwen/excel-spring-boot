@@ -35,19 +35,19 @@ public enum LocalDateStringConverter implements Converter<LocalDate> {
 
     @Override
     public LocalDate convertToJavaData(ReadCellData cellData, ExcelContentProperty contentProperty,
-            GlobalConfiguration globalConfiguration) throws ParseException {
+        GlobalConfiguration globalConfiguration) throws ParseException {
         if (contentProperty == null || contentProperty.getDateTimeFormatProperty() == null) {
             return LocalDate.parse(cellData.getStringValue());
         } else {
-            DateTimeFormatter formatter = DateTimeFormatter
-                    .ofPattern(contentProperty.getDateTimeFormatProperty().getFormat());
+            DateTimeFormatter formatter =
+                DateTimeFormatter.ofPattern(contentProperty.getDateTimeFormatProperty().getFormat());
             return LocalDate.parse(cellData.getStringValue(), formatter);
         }
     }
 
     @Override
     public WriteCellData<String> convertToExcelData(LocalDate value, ExcelContentProperty contentProperty,
-            GlobalConfiguration globalConfiguration) {
+        GlobalConfiguration globalConfiguration) {
         DateTimeFormatter formatter;
         if (contentProperty == null || contentProperty.getDateTimeFormatProperty() == null) {
             formatter = DateTimeFormatter.ISO_LOCAL_DATE;

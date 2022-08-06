@@ -74,22 +74,20 @@ public class ExcelHandlerConfiguration {
     /**
      * 返回Excel文件的 response 处理器
      *
-     * @param sheetWriteHandlerList
-     *            页签写入处理器集合
+     * @param sheetWriteHandlerList 页签写入处理器集合
      * @return ResponseExcelReturnValueHandler
      */
     @Bean
     @ConditionalOnMissingBean
-    public ExportExcelReturnValueHandler responseExcelReturnValueHandler(
-            List<SheetWriteHandler> sheetWriteHandlerList) {
+    public ExportExcelReturnValueHandler
+        responseExcelReturnValueHandler(List<SheetWriteHandler> sheetWriteHandlerList) {
         return new ExportExcelReturnValueHandler(sheetWriteHandlerList);
     }
 
     /**
      * excel 头的国际化处理器
      *
-     * @param messageSource
-     *            国际化源
+     * @param messageSource 国际化源
      * @return I18nHeaderCellWriteHandler
      */
     @Bean

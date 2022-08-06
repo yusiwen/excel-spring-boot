@@ -39,15 +39,15 @@ public class ListConverter implements Converter<List<?>> {
 
     @Override
     public List<?> convertToJavaData(ReadCellData cellData, ExcelContentProperty contentProperty,
-            GlobalConfiguration globalConfiguration) {
+        GlobalConfiguration globalConfiguration) {
         String[] value = StringUtils.delimitedListToStringArray(cellData.getStringValue(), ",");
-        return (List<?>) conversionService.convert(value, TypeDescriptor.valueOf(String[].class),
-                new TypeDescriptor(contentProperty.getField()));
+        return (List<?>)conversionService.convert(value, TypeDescriptor.valueOf(String[].class),
+            new TypeDescriptor(contentProperty.getField()));
     }
 
     @Override
     public WriteCellData<String> convertToExcelData(List<?> value, ExcelContentProperty contentProperty,
-            GlobalConfiguration globalConfiguration) {
+        GlobalConfiguration globalConfiguration) {
         return new WriteCellData<>(StringUtils.collectionToCommaDelimitedString(value));
     }
 

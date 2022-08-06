@@ -43,8 +43,8 @@ public class DefaultAnalysisEventListener extends AbstractListAnalysisEventListe
 
         Set<ConstraintViolation<Object>> violations = Validators.validate(o);
         if (!violations.isEmpty()) {
-            Set<String> messageSet = violations.stream().map(ConstraintViolation::getMessage)
-                    .collect(Collectors.toSet());
+            Set<String> messageSet =
+                violations.stream().map(ConstraintViolation::getMessage).collect(Collectors.toSet());
             errorMessageList.add(new ErrorMessage(lineNum, messageSet));
         } else {
             list.add(o);

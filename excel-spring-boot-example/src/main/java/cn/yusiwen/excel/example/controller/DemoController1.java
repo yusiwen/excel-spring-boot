@@ -43,7 +43,7 @@ public class DemoController1 {
 
     @PostMapping("/import")
     public String import1(@ImportExcel List<DemoData1> data1List, BindingResult bindingResult) {
-        List<ErrorMessage> errorMessageList = (List<ErrorMessage>) bindingResult.getTarget();
+        List<ErrorMessage> errorMessageList = (List<ErrorMessage>)bindingResult.getTarget();
         if (errorMessageList != null) {
             log.error("Binding errors: {}", errorMessageList);
         }

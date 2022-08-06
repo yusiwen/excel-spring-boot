@@ -12,6 +12,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.util.Assert;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
@@ -56,8 +57,7 @@ public class ResponseExcelAutoConfiguration {
     /**
      * Excel名称解析处理切面
      *
-     * @param nameProcessor
-     *            SPEL 解析处理器
+     * @param nameProcessor SPEL 解析处理器
      * @return DynamicNameAspect
      */
     @Bean
@@ -71,12 +71,12 @@ public class ResponseExcelAutoConfiguration {
      */
     @PostConstruct
     public void setReturnValueHandlers() {
-        List<HandlerMethodReturnValueHandler> returnValueHandlers = requestMappingHandlerAdapter
-                .getReturnValueHandlers();
+        List<HandlerMethodReturnValueHandler> returnValueHandlers =
+            requestMappingHandlerAdapter.getReturnValueHandlers();
 
         List<HandlerMethodReturnValueHandler> newHandlers = new ArrayList<>();
         newHandlers.add(exportExcelReturnValueHandler);
-        assert returnValueHandlers != null;
+        Assert.isTrue(returnValueHandlers != null, "HandlerMethodReturnValueHandler is null");
         newHandlers.addAll(returnValueHandlers);
         requestMappingHandlerAdapter.setReturnValueHandlers(newHandlers);
     }

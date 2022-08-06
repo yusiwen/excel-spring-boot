@@ -41,7 +41,7 @@ public enum LocalDateTimeStringConverter implements Converter<LocalDateTime> {
 
     @Override
     public LocalDateTime convertToJavaData(ReadCellData cellData, ExcelContentProperty contentProperty,
-            GlobalConfiguration globalConfiguration) throws ParseException {
+        GlobalConfiguration globalConfiguration) throws ParseException {
         String stringValue = cellData.getStringValue();
         String pattern;
         if (contentProperty == null || contentProperty.getDateTimeFormatProperty() == null) {
@@ -55,7 +55,7 @@ public enum LocalDateTimeStringConverter implements Converter<LocalDateTime> {
 
     @Override
     public WriteCellData<String> convertToExcelData(LocalDateTime value, ExcelContentProperty contentProperty,
-            GlobalConfiguration globalConfiguration) {
+        GlobalConfiguration globalConfiguration) {
         String pattern;
         if (contentProperty == null || contentProperty.getDateTimeFormatProperty() == null) {
             pattern = DateUtils.DATE_FORMAT_19;
@@ -69,8 +69,7 @@ public enum LocalDateTimeStringConverter implements Converter<LocalDateTime> {
     /**
      * switch date format
      *
-     * @param dateString
-     *            dateString
+     * @param dateString dateString
      * @return pattern
      */
     private static String switchDateFormat(String dateString) {

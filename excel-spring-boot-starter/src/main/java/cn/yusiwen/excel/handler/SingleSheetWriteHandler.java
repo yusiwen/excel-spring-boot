@@ -21,21 +21,20 @@ import cn.yusiwen.excel.kit.ExcelException;
 public class SingleSheetWriteHandler extends AbstractSheetWriteHandler {
 
     public SingleSheetWriteHandler(ExcelConfigProperties configProperties,
-            ObjectProvider<List<Converter<?>>> converterProvider, WriterBuilderEnhancer excelWriterBuilderEnhance) {
+        ObjectProvider<List<Converter<?>>> converterProvider, WriterBuilderEnhancer excelWriterBuilderEnhance) {
         super(configProperties, converterProvider, excelWriterBuilderEnhance);
     }
 
     /**
      * obj 是List 且list不为空同时list中的元素不是是List 才返回true
      *
-     * @param obj
-     *            返回对象
+     * @param obj 返回对象
      * @return boolean
      */
     @Override
     public boolean support(Object obj) {
         if (obj instanceof List) {
-            List<?> objList = (List<?>) obj;
+            List<?> objList = (List<?>)obj;
             return !objList.isEmpty() && !(objList.get(0) instanceof List);
         } else {
             throw new ExcelException("@ResponseExcel 返回值必须为List类型");
@@ -44,13 +43,13 @@ public class SingleSheetWriteHandler extends AbstractSheetWriteHandler {
 
     @Override
     public void write(Object obj, HttpServletResponse response, ExportExcel exportExcel) {
-        List<?> list = (List<?>) obj;
+        List<?> list = (List<?>)obj;
         ExcelWriter excelWriter = getExcelWriter(response, exportExcel);
 
         // 有模板则不指定sheet名
         Class<?> dataClass = list.get(0).getClass();
-        WriteSheet sheet = this.sheet(exportExcel.sheets()[0], dataClass, exportExcel.template(),
-                exportExcel.headGenerator());
+        WriteSheet sheet =
+            this.sheet(exportExcel.sheets()[0], dataClass, exportExcel.template(), exportExcel.headGenerator());
 
         // 填充 sheet
         if (exportExcel.fill()) {

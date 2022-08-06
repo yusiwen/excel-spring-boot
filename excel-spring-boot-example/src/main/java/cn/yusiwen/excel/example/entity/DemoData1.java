@@ -20,7 +20,7 @@ public class DemoData1 {
     /**
      * User name
      */
-    @ColumnWidth(30)  // 定义宽度
+    @ColumnWidth(30) // 定义宽度
     @ExcelProperty("用户名") // 定义列名称
     @ContentStyle(fillPatternType = FillPatternTypeEnum.SOLID_FOREGROUND, fillForegroundColor = 40)
     private String username;

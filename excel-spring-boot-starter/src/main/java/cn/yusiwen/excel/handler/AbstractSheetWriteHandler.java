@@ -103,17 +103,17 @@ public abstract class AbstractSheetWriteHandler implements SheetWriteHandler, Ap
         RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
         String name = null;
         if (requestAttributes != null) {
-            name = (String) requestAttributes.getAttribute(DynamicNameAspect.EXCEL_NAME_KEY,
-                    RequestAttributes.SCOPE_REQUEST);
+            name = (String)requestAttributes.getAttribute(DynamicNameAspect.EXCEL_NAME_KEY,
+                RequestAttributes.SCOPE_REQUEST);
         }
         if (isEmpty(name)) {
             name = UUID.randomUUID().toString();
         }
         String fileName = String.format("%s%s", URLEncoder.encode(name, StandardCharsets.UTF_8.name()),
-                exportExcel.suffix().getValue());
+            exportExcel.suffix().getValue());
         // 根据实际的文件类型找到对应的 contentType
-        String contentType = MediaTypeFactory.getMediaType(fileName).map(MediaType::toString)
-                .orElse("application/vnd.ms-excel");
+        String contentType =
+            MediaTypeFactory.getMediaType(fileName).map(MediaType::toString).orElse("application/vnd.ms-excel");
         response.setContentType(contentType);
         response.setCharacterEncoding("utf-8");
         response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + fileName);
@@ -123,16 +123,14 @@ public abstract class AbstractSheetWriteHandler implements SheetWriteHandler, Ap
     /**
      * 通用的获取ExcelWriter方法
      *
-     * @param response
-     *            HttpServletResponse
-     * @param exportExcel
-     *            ResponseExcel注解
+     * @param response HttpServletResponse
+     * @param exportExcel ResponseExcel注解
      * @return ExcelWriter
      */
     @SneakyThrows(IOException.class)
     public ExcelWriter getExcelWriter(HttpServletResponse response, ExportExcel exportExcel) {
-        ExcelWriterBuilder writerBuilder = EasyExcel.write(response.getOutputStream())
-                .registerConverter(LocalDateStringConverter.INSTANCE)
+        ExcelWriterBuilder writerBuilder =
+            EasyExcel.write(response.getOutputStream()).registerConverter(LocalDateStringConverter.INSTANCE)
                 .registerConverter(LocalDateTimeStringConverter.INSTANCE).autoCloseStream(Boolean.TRUE)
                 .excelType(exportExcel.suffix()).inMemory(exportExcel.inMemory());
 
@@ -170,8 +168,8 @@ public abstract class AbstractSheetWriteHandler implements SheetWriteHandler, Ap
 
         String templatePath = configProperties.getTemplatePath();
         if (StringUtils.hasText(exportExcel.template())) {
-            ClassPathResource classPathResource = new ClassPathResource(
-                    templatePath + File.separator + exportExcel.template());
+            ClassPathResource classPathResource =
+                new ClassPathResource(templatePath + File.separator + exportExcel.template());
             InputStream inputStream = classPathResource.getInputStream();
             writerBuilder.withTemplate(inputStream);
         }
@@ -184,8 +182,7 @@ public abstract class AbstractSheetWriteHandler implements SheetWriteHandler, Ap
     /**
      * 自定义注入转换器 如果有需要，子类自己重写
      *
-     * @param builder
-     *            ExcelWriterBuilder
+     * @param builder ExcelWriterBuilder
      */
     public void registerCustomConverter(ExcelWriterBuilder builder) {
         converterProvider.ifAvailable(converters -> converters.forEach(builder::registerConverter));
@@ -194,26 +191,22 @@ public abstract class AbstractSheetWriteHandler implements SheetWriteHandler, Ap
     /**
      * 获取 WriteSheet 对象
      *
-     * @param sheet
-     *            sheet annotation info
-     * @param dataClass
-     *            数据类型
-     * @param template
-     *            模板
-     * @param bookHeadEnhancerClass
-     *            自定义头处理器
+     * @param sheet sheet annotation info
+     * @param dataClass 数据类型
+     * @param template 模板
+     * @param bookHeadEnhancerClass 自定义头处理器
      * @return WriteSheet
      */
     public WriteSheet sheet(Sheet sheet, Class<?> dataClass, String template,
-            Class<? extends HeadGenerator> bookHeadEnhancerClass) {
+        Class<? extends HeadGenerator> bookHeadEnhancerClass) {
 
         // Sheet 编号和名称
         Integer sheetNo = sheet.sheetNo() >= 0 ? sheet.sheetNo() : null;
         String sheetName = sheet.sheetName();
 
         // 是否模板写入
-        ExcelWriterSheetBuilder writerSheetBuilder = StringUtils.hasText(template) ? EasyExcel.writerSheet(sheetNo)
-                : EasyExcel.writerSheet(sheetNo, sheetName);
+        ExcelWriterSheetBuilder writerSheetBuilder =
+            StringUtils.hasText(template) ? EasyExcel.writerSheet(sheetNo) : EasyExcel.writerSheet(sheetNo, sheetName);
 
         // 头信息增强 1. 优先使用 sheet 指定的头信息增强 2. 其次使用 @ResponseExcel 中定义的全局头信息增强
         Class<? extends HeadGenerator> headGenerateClass = null;
@@ -237,13 +230,13 @@ public abstract class AbstractSheetWriteHandler implements SheetWriteHandler, Ap
 
         // sheetBuilder 增强
         writerSheetBuilder = excelWriterBuilderEnhance.enhanceSheet(writerSheetBuilder, sheetNo, sheetName, dataClass,
-                template, headGenerateClass);
+            template, headGenerateClass);
 
         return writerSheetBuilder.build();
     }
 
     private void fillCustomHeadInfo(Class<?> dataClass, Class<? extends HeadGenerator> headEnhancerClass,
-            ExcelWriterSheetBuilder writerSheetBuilder) {
+        ExcelWriterSheetBuilder writerSheetBuilder) {
         HeadGenerator headGenerator = this.applicationContext.getBean(headEnhancerClass);
         Assert.notNull(headGenerator, "The header generated bean does not exist.");
         HeadMeta head = headGenerator.head(dataClass);
@@ -254,8 +247,7 @@ public abstract class AbstractSheetWriteHandler implements SheetWriteHandler, Ap
     /**
      * 是否为Null Head Generator
      *
-     * @param headGeneratorClass
-     *            头生成器类型
+     * @param headGeneratorClass 头生成器类型
      * @return true 已指定 false 未指定(默认值)
      */
     private boolean isNotInterface(Class<? extends HeadGenerator> headGeneratorClass) {

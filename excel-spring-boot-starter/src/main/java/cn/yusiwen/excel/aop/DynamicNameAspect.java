@@ -35,7 +35,7 @@ public class DynamicNameAspect {
 
     @Before("@annotation(excel)")
     public void around(JoinPoint point, ExportExcel excel) {
-        MethodSignature ms = (MethodSignature) point.getSignature();
+        MethodSignature ms = (MethodSignature)point.getSignature();
 
         String name = excel.name();
         // 当配置的 excel 名称为空时，取当前时间

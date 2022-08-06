@@ -10,8 +10,7 @@ import cn.yusiwen.excel.vo.ErrorMessage;
  * list analysis EventListener
  *
  * @author yusiwen
- * @param <T>
- *            EventListener
+ * @param <T> EventListener
  */
 public abstract class AbstractListAnalysisEventListener<T> extends AnalysisEventListener<T> {
 

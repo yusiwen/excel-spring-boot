@@ -39,15 +39,15 @@ public class SetConverter implements Converter<Set<?>> {
 
     @Override
     public Set<?> convertToJavaData(ReadCellData cellData, ExcelContentProperty contentProperty,
-            GlobalConfiguration globalConfiguration) {
+        GlobalConfiguration globalConfiguration) {
         String[] value = StringUtils.delimitedListToStringArray(cellData.getStringValue(), ",");
-        return (Set<?>) conversionService.convert(value, TypeDescriptor.valueOf(String[].class),
-                new TypeDescriptor(contentProperty.getField()));
+        return (Set<?>)conversionService.convert(value, TypeDescriptor.valueOf(String[].class),
+            new TypeDescriptor(contentProperty.getField()));
     }
 
     @Override
     public WriteCellData<String> convertToExcelData(Set<?> value, ExcelContentProperty contentProperty,
-            GlobalConfiguration globalConfiguration) {
+        GlobalConfiguration globalConfiguration) {
         return new WriteCellData<>(StringUtils.collectionToCommaDelimitedString(value));
     }
 

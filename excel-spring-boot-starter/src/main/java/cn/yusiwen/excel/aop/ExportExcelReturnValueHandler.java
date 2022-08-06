@@ -33,8 +33,7 @@ public class ExportExcelReturnValueHandler implements HandlerMethodReturnValueHa
     /**
      * 只处理@ResponseExcel 声明的方法
      *
-     * @param parameter
-     *            方法签名
+     * @param parameter 方法签名
      * @return 是否处理
      */
     @Override
@@ -45,18 +44,14 @@ public class ExportExcelReturnValueHandler implements HandlerMethodReturnValueHa
     /**
      * 处理逻辑
      *
-     * @param o
-     *            返回参数
-     * @param parameter
-     *            方法签名
-     * @param mavContainer
-     *            上下文容器
-     * @param nativeWebRequest
-     *            上下文
+     * @param o 返回参数
+     * @param parameter 方法签名
+     * @param mavContainer 上下文容器
+     * @param nativeWebRequest 上下文
      */
     @Override
     public void handleReturnValue(Object o, MethodParameter parameter, ModelAndViewContainer mavContainer,
-            NativeWebRequest nativeWebRequest) {
+        NativeWebRequest nativeWebRequest) {
         /* check */
         HttpServletResponse response = nativeWebRequest.getNativeResponse(HttpServletResponse.class);
         Assert.state(response != null, "No HttpServletResponse");
@@ -65,7 +60,7 @@ public class ExportExcelReturnValueHandler implements HandlerMethodReturnValueHa
         mavContainer.setRequestHandled(true);
 
         sheetWriteHandlerList.stream().filter(handler -> handler.support(o)).findFirst()
-                .ifPresent(handler -> handler.export(o, response, exportExcel));
+            .ifPresent(handler -> handler.export(o, response, exportExcel));
     }
 
 }

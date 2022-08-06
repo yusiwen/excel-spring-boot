@@ -16,19 +16,15 @@ public class DefaultWriterBuilderEnhancer implements WriterBuilderEnhancer {
     /**
      * ExcelWriterBuilder 增强
      *
-     * @param writerBuilder
-     *            ExcelWriterBuilder
-     * @param response
-     *            HttpServletResponse
-     * @param exportExcel
-     *            ResponseExcel
-     * @param templatePath
-     *            模板地址
+     * @param writerBuilder ExcelWriterBuilder
+     * @param response HttpServletResponse
+     * @param exportExcel ResponseExcel
+     * @param templatePath 模板地址
      * @return ExcelWriterBuilder
      */
     @Override
     public ExcelWriterBuilder enhanceExcel(ExcelWriterBuilder writerBuilder, HttpServletResponse response,
-            ExportExcel exportExcel, String templatePath) {
+        ExportExcel exportExcel, String templatePath) {
         // doNothing
         return writerBuilder;
     }
@@ -36,23 +32,17 @@ public class DefaultWriterBuilderEnhancer implements WriterBuilderEnhancer {
     /**
      * ExcelWriterSheetBuilder 增强
      *
-     * @param writerSheetBuilder
-     *            ExcelWriterSheetBuilder
-     * @param sheetNo
-     *            sheet角标
-     * @param sheetName
-     *            sheet名，有模板时为空
-     * @param dataClass
-     *            当前写入的数据所属类
-     * @param template
-     *            模板文件
-     * @param headEnhancerClass
-     *            当前指定的自定义头处理器
+     * @param writerSheetBuilder ExcelWriterSheetBuilder
+     * @param sheetNo sheet角标
+     * @param sheetName sheet名，有模板时为空
+     * @param dataClass 当前写入的数据所属类
+     * @param template 模板文件
+     * @param headEnhancerClass 当前指定的自定义头处理器
      * @return ExcelWriterSheetBuilder
      */
     @Override
     public ExcelWriterSheetBuilder enhanceSheet(ExcelWriterSheetBuilder writerSheetBuilder, Integer sheetNo,
-            String sheetName, Class<?> dataClass, String template, Class<? extends HeadGenerator> headEnhancerClass) {
+        String sheetName, Class<?> dataClass, String template, Class<? extends HeadGenerator> headEnhancerClass) {
         // doNothing
         return writerSheetBuilder;
     }

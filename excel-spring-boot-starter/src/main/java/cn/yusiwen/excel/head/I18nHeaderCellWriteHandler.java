@@ -41,20 +41,20 @@ public class I18nHeaderCellWriteHandler implements CellWriteHandler {
 
     public I18nHeaderCellWriteHandler(MessageSource messageSource) {
         this.messageSource = messageSource;
-        this.placeholderResolver = placeholderName -> this.messageSource.getMessage(placeholderName, null,
-                LocaleContextHolder.getLocale());
+        this.placeholderResolver =
+            placeholderName -> this.messageSource.getMessage(placeholderName, null, LocaleContextHolder.getLocale());
     }
 
     @Override
     public void beforeCellCreate(WriteSheetHolder writeSheetHolder, WriteTableHolder writeTableHolder, Row row,
-            Head head, Integer columnIndex, Integer relativeRowIndex, Boolean isHead) {
+        Head head, Integer columnIndex, Integer relativeRowIndex, Boolean isHead) {
         if (isHead != null && isHead) {
             List<String> originHeadNameList = head.getHeadNameList();
             if (CollectionUtils.isNotEmpty(originHeadNameList)) {
                 // 国际化处理
                 List<String> i18nHeadNames = originHeadNameList.stream()
-                        .map(headName -> propertyPlaceholderHelper.replacePlaceholders(headName, placeholderResolver))
-                        .collect(Collectors.toList());
+                    .map(headName -> propertyPlaceholderHelper.replacePlaceholders(headName, placeholderResolver))
+                    .collect(Collectors.toList());
                 head.setHeadNameList(i18nHeadNames);
             }
         }
