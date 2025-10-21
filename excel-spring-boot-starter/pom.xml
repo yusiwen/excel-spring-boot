@@ -9,7 +9,7 @@
     <artifactId>excel-spring-boot-starter</artifactId>
     <name>excel-spring-boot-starter</name>
     <properties>
-        <easyexcel.version>3.1.1</easyexcel.version>
+        <easyexcel.version>4.0.3</easyexcel.version>
         <mica.version>2.3.1</mica.version>
         <commons-compress>1.21</commons-compress>
     </properties>
